@@ -52,6 +52,34 @@ defmodule PhoenixOauth2Provider.Router do
   @doc """
   OAuth 2.0 browser routes macro.
 
+  Use this macro to define the protected browser oauth routes.
+
+  ## Example
+
+      scope "/" do
+        pipe_through [:browser, :protected]
+
+        oauth_routes()
+      end
+  """
+  defmacro oauth_routes(options \\ []) do
+    quote location: :keep do
+      oauth_scope unquote(options), @phoenix_oauth2_provider_config do
+        scope "/authorize" do
+          get "/", AuthorizationController, :new
+          post "/", AuthorizationController, :create
+          get "/:code", AuthorizationController, :show
+          delete "/", AuthorizationController, :delete
+        end
+        resources "/applications", ApplicationController, param: "uid"
+        resources "/authorized_applications", AuthorizedApplicationController, only: [:index, :delete], param: "uid"
+      end
+    end
+  end
+
+  @doc """
+  OAuth 2.0 browser routes macro.
+
   Use this macro to define the protected browser oauth authorization routes.
 
   ## Example
