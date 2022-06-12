@@ -35,19 +35,20 @@ defmodule PhoenixOauth2Provider.Mixfile do
 
   defp deps do
     [
-      {:ex_oauth2_provider, "~> 0.5.1"},
+      # {:ex_oauth2_provider, "~> 0.5.1"},
+      {:ex_oauth2_provider, git: "https://github.com/aaronsakowski/ex_oauth2_provider.git"},
       {:phoenix, "~> 1.4"},
-      {:phoenix_html, "~> 2.0"},
+      {:phoenix_html, "~> 3.0"},
 
-      {:phoenix_ecto, "~> 4.0.0", only: [:test, :dev]},
+      {:phoenix_ecto, "~> 4.4", only: [:test, :dev]},
       {:credo, "~> 1.1.0", only: [:dev, :test]},
       {:jason, "~> 1.0", only: [:dev, :test]},
 
       {:ex_doc, ">= 0.0.0", only: :dev},
 
-      {:ecto_sql, "~> 3.0.0", only: :test},
+      {:ecto_sql, "~> 3.5.0", only: :test},
       {:plug_cowboy, "~> 2.0", only: :test},
-      {:postgrex, "~> 0.14.0", only: :test}
+      {:postgrex, "~> 0.15.0", only: :test}
     ]
   end
 
